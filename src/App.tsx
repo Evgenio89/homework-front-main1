@@ -1,18 +1,31 @@
-import './App.css';
-import { HW1 } from './HW/1/HW1';
-import { HW2 } from './HW/2/HW2';
-import { HW3 } from './HW/3/HW3';
-import { HW4 } from './HW/4/HW4';
+import {useState} from "react";
+import {FullInput} from "./Components/FullInput";
 
-function App() {
-  return (
-    <div className="App">
-      {/*<HW1 />*/}
-      {/*<HW2 />*/}
-      {/*<HW3 />*/}
-      <HW4 />
-    </div>
-  );
+export const App = () => {
+    const [message, setMessage] = useState([
+            {message: 'message1'},
+            {message: 'message2'},
+            {message: 'message3'},
+            {message: 'message4'},
+            {message: 'message5'}
+        ]
+    )
+
+    const addMessage = (title: string) => {
+        const newTitle = {
+            message: title
+        }
+
+        setMessage([newTitle, ...message])
+    }
+    return (
+        <div className="App">
+           <FullInput addMessage={addMessage}/>
+            {message.map((el, index) => {
+                return (
+                    <div key={index}>{el.message}</div>
+                )
+            })}
+        </div>
+    );
 }
-
-export default App;
